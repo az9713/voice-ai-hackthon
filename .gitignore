@@ -1,0 +1,14 @@
+# Secrets / personal — never commit
+.env
+.ignore/
+*.mhtml
+*.jpg
+*.jpeg
+*.png
+
+# Redundant build artifacts
+demo_github.mp4
+
+# Python
+__pycache__/
+*.pyc

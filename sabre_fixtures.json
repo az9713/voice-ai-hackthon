@@ -1,0 +1,2007 @@
+{
+  "Booking Management API - Beta": {
+    "base": "https://api.cert.platform.sabre.com/v1/trip/orders",
+    "operations": {
+      "cancelBooking": {
+        "method": "POST",
+        "path": "/cancelBooking",
+        "request_example": {
+          "confirmationId": "XVOWMO",
+          "flights": [
+            {
+              "itemId": "12"
+            },
+            {
+              "itemId": "14"
+            }
+          ],
+          "hotels": [
+            {
+              "itemId": "37"
+            }
+          ]
+        },
+        "response_example": {
+          "timestamp": "2025-11-28T08:06:43",
+          "request": {
+            "confirmationId": "XVOWMO",
+            "retrieveBooking": false,
+            "errorHandlingPolicy": "HALT_ON_ERROR",
+            "cancelAll": false,
+            "voidNonElectronicTickets": false,
+            "refundDocumentsType": "Tickets",
+            "flights": [
+              {
+                "itemId": "12"
+              },
+              {
+                "itemId": "14"
+              }
+            ],
+            "hotels": [
+              {
+                "itemId": "37"
+              }
+            ]
+          }
+        }
+      },
+      "voidTickets": {
+        "method": "POST",
+        "path": "/voidFlightTickets",
+        "request_example": {
+          "tickets": [
+            "0015519872361",
+            "0015519872362"
+          ]
+        },
+        "response_example": {
+          "timestamp": "2026-02-25T07:52:31",
+          "request": {
+            "errorHandlingPolicy": "HALT_ON_ERROR",
+            "tickets": [
+              "0015519872361",
+              "0015519872362"
+            ],
+            "voidNonElectronicTickets": false
+          },
+          "voidedTickets": [
+            "0015519872361",
+            "0015519872362"
+          ]
+        }
+      },
+      "refundTickets": {
+        "method": "POST",
+        "path": "/refundFlightTickets",
+        "request_example": {
+          "tickets": [
+            {
+              "number": "1605519872360"
+            }
+          ],
+          "designatePrinters": [
+            {
+              "hardcopy": {
+                "address": "498BF1"
+              }
+            },
+            {
+              "ticket": {
+                "countryCode": "AT"
+              }
+            }
+          ]
+        },
+        "response_example": {
+          "timestamp": "2026-02-25T07:09:57",
+          "request": {
+            "errorHandlingPolicy": "HALT_ON_ERROR",
+            "tickets": [
+              {
+                "number": "1605519872360"
+              }
+            ],
+            "designatePrinters": [
+              {
+                "hardcopy": {
+                  "address": "498BF1"
+                }
+              },
+              {
+                "ticket": {
+                  "countryCode": "AT"
+                }
+              }
+            ],
+            "documentsType": "Tickets"
+          },
+          "tickets": [
+            {
+              "number": "1605519872360",
+              "refundTotals": {
+                "subtotal": "1120.00",
+                "taxes": "234.42",
+                "total": "1354.42",
+                "currencyCode": "PLN"
+              }
+            }
+          ],
+          "refundedTickets": [
+            "1605519872360"
+          ]
+        }
+      },
+      "checkTickets": {
+        "method": "POST",
+        "path": "/checkFlightTickets",
+        "request_example": {
+          "tickets": [
+            {
+              "number": "0167489825830",
+              "refundQualifiers": {
+                "commissionAmount": "25.00"
+              }
+            }
+          ]
+        },
+        "response_example": {
+          "timestamp": "2024-10-28T11:11:21Z",
+          "request": {
+            "tickets": [
+              {
+                "number": "0167489825830",
+                "refundQualifiers": {
+                  "commissionAmount": "25.00"
+                }
+              }
+            ]
+          },
+          "tickets": [
+            {
+              "number": "0167489825830",
+              "isVoidable": true,
+              "isRefundable": true,
+              "isAutomatedRefundsEligible": true,
+              "refundPenalties": [
+                {
+                  "applicability": "BEFORE_DEPARTURE",
+                  "conditionsApply": false,
+                  "penalty": {
+                    "amount": "100.00",
+                    "currencyCode": "USD"
+                  },
+                  "hasNoShowCost": true,
+                  "noShowPenalty": {
+                    "amount": "100.00",
+                    "currencyCode": "USD",
+                    "penalty": {
+                      "amount": "100.00",
+                      "currencyCode": "USD"
+                    },
+                    "source": "Category 33"
+                  },
+                  "source": "Category 33"
+                }
+              ],
+              "refundTaxes": [
+                {
+                  "taxCode": "XY",
+                  "amount": "100.00"
+                }
+              ],
+              "refundTotals": {
+                "subtotal": "100.00",
+                "taxes": "8.00",
+                "fees": "20.00",
+                "total": "128.00",
+                "currencyCode": "USD",
+                "netRemit": "110.00"
+              },
+              "isChangeable": true,
+              "exchangePenalties": [
+                {
+                  "applicability": "BEFORE_DEPARTURE",
+                  "conditionsApply": false,
+                  "penalty": {
+                    "amount": "100.00",
+                    "currencyCode": "USD"
+                  },
+                  "hasNoShowCost": true,
+                  "noShowPenalty": {
+                    "amount": "100.00",
+                    "currencyCode": "USD",
+                    "penalty": {
+                      "amount": "100.00",
+                      "currencyCode": "USD"
+                    },
+                    "source": "Category 33"
+                  },
+                  "source": "Category 33"
+                }
+              ]
+            }
+          ]
+        }
+      },
+      "fulfillTickets": {
+        "method": "POST",
+        "path": "/fulfillFlightTickets",
+        "request_example": {
+          "confirmationId": "PLVFMD",
+          "fulfillments": [
+            {
+              "ticketingQualifiers": {
+                "priceQuoteRecordIds": [
+                  "1"
+                ]
+              },
+              "payment": {
+                "primaryFormOfPayment": 1
+              }
+            }
+          ],
+          "designatePrinters": [
+            {
+              "hardcopy": {
+                "address": "E52405"
+              }
+            },
+            {
+              "ticket": {
+                "countryCode": "AT"
+              }
+            }
+          ],
+          "formsOfPayment": [
+            {
+              "type": "PAYMENTCARD",
+              "cardTypeCode": "VI",
+              "cardNumber": "4444333322221111",
+              "cardSecurityCode": "123",
+              "expiryDate": "2030-03"
+            }
+          ],
+          "commitTicketToBookingWaitTime": 6000
+        },
+        "response_example": {
+          "timestamp": "2026-02-25T08:15:27",
+          "tickets": [
+            {
+              "isCommitted": true,
+              "number": "0015519872372",
+              "date": "2026-02-25",
+              "travelerGivenName": "JOHN",
+              "travelerSurname": "KOWALSKI",
+              "payment": {
+                "total": "2219.07",
+                "currencyCode": "PLN"
+              },
+              "ticketStatusName": "Issued",
+              "ticketStatusCode": "TE",
+              "ticketingPcc": "U9PK"
+            },
+            {
+              "isCommitted": true,
+              "number": "0015519872373",
+              "date": "2026-02-25",
+              "travelerGivenName": "ALL",
+              "travelerSurname": "KOWALSKI",
+              "payment": {
+                "total": "2219.07",
+                "currencyCode": "PLN"
+              },
+              "ticketStatusName": "Issued",
+              "ticketStatusCode": "TE",
+              "ticketingPcc": "U9PK"
+            }
+          ],
+          "request": {
+            "confirmationId": "PLVFMD",
+            "retainAccounting": false,
+            "fulfillments": [
+              {
+                "ticketingQualifiers": {
+                  "priceWithTaxes": true,
+                  "returnFareFlexibilityDetails": false,
+                  "priceQuoteRecordIds": [
+                    "1"
+                  ],
+                  "isNetFareCommission": false
+                },
+                "payment": {
+                  "primaryFormOfPayment": 1
+                }
+              }
+            ],
+            "receivedFrom": "Fulfill Flight Tickets",
+            "designatePrinters": [
+              {
+                "hardcopy": {
+                  "address": "E52405"
+                }
+              },
+              {
+                "ticket": {
+                  "countryCode": "AT"
+                }
+              }
+            ],
+            "formsOfPayment": [
+              {
+                "cardTypeCode": "VI",
+                "cardNumber": "4444333322221111",
+                "cardSecurityCode": "123",
+                "expiryDate": "2030-03",
+                "type": "PAYMENTCARD"
+              }
+            ],
+            "generateSingleInvoice": false,
+            "commitTicketToBookingWaitTime": 6000,
+            "acceptNegotiatedFare": true,
+            "acceptPriceChanges": true,
+            "backDatePriceQuoteMethod": "Reprice",
+            "priceQuoteExpirationMethod": "Reprice"
+          }
+        }
+      },
+      "getBooking": {
+        "method": "POST",
+        "path": "/getBooking",
+        "request_example": {
+          "confirmationId": "BQAUZG"
+        },
+        "response_example": {
+          "startDate": "2024-06-20",
+          "endDate": "2024-06-30",
+          "isTicketed": true,
+          "contactInfo": {
+            "emails": [
+              "AGENCY@AGENCY.COM"
+            ],
+            "phones": [
+              "+48-987-123-4567",
+              "+1-555-123-4567"
+            ]
+          },
+          "travelers": [
+            {
+              "givenName": "MAX",
+              "surname": "POWER",
+              "type": "ADULT",
+              "passengerCode": "ADT",
+              "emails": [
+                "CUSTOMER@CUSTOMER.COM"
+              ],
+              "address": {
+                "freeText": ""
+              }
+            }
+          ],
+          "flights": [
+            {
+              "itemId": "9",
+              "confirmationId": "S87MYH",
+              "sourceType": "ATPCO",
+              "flightNumber": 439,
+              "airlineCode": "LH",
+              "operatingFlightNumber": 439,
+              "operatingAirlineCode": "LH",
+              "fromAirportCode": "DFW",
+              "toAirportCode": "FRA",
+              "departureDate": "2024-06-20",
+              "departureTime": "16:00",
+              "departureTerminalName": "TERMINAL D",
+              "departureGate": "D",
+              "arrivalDate": "2024-06-21",
+              "arrivalTime": "08:50",
+              "arrivalTerminalName": "TERMINAL 1",
+              "arrivalGate": "1",
+              "cabinTypeName": "ECONOMY",
+              "cabinTypeCode": "Y",
+              "aircraftTypeCode": "333",
+              "bookingClass": "Y",
+              "meals": [
+                {
+                  "code": "R",
+                  "description": "Refreshment for purchase"
+                }
+              ],
+              "flightStatusCode": "HK",
+              "flightStatusName": "Confirmed",
+              "durationInMinutes": 590,
+              "distanceInMiles": 5143
+            },
+            {
+              "itemId": "10",
+              "confirmationId": "S87MYH",
+              "sourceType": "ATPCO",
+              "flightNumber": 1384,
+              "airlineCode": "LH",
+              "operatingFlightNumber": 1384,
+              "operatingAirlineCode": "LH",
+              "fromAirportCode": "FRA",
+              "toAirportCode": "KRK",
+              "departureDate": "2024-06-21",
+              "departureTime": "10:25",
+              "departureTerminalName": "TERMINAL 1",
+              "departureGate": "1",
+              "arrivalDate": "2024-06-21",
+              "arrivalTime": "11:55",
+              "cabinTypeName": "ECONOMY",
+              "cabinTypeCode": "Y",
+              "aircraftTypeCode": "319",
+              "bookingClass": "Y",
+              "meals": [
+                {
+                  "code": "R",
+                  "description": "Refreshment for purchase"
+                }
+              ],
+              "flightStatusCode": "HK",
+              "flightStatusName": "Confirmed",
+              "durationInMinutes": 90,
+              "distanceInMiles": 498
+            },
+            {
+              "itemId": "11",
+              "confirmationId": "S87MYH",
+              "sourceType": "ATPCO",
+              "flightNumber": 1371,
+              "airlineCode": "LH",
+              "operatingFlightNumber": 1371,
+              "operatingAirlineCode": "LH",
+              "fromAirportCode": "KRK",
+              "toAirportCode": "FRA",
+              "departureDate": "2024-06-30",
+              "departureTime": "06:15",
+              "arrivalDate": "2024-06-30",
+              "arrivalTime": "07:50",
+              "arrivalTerminalName": "TERMINAL 1",
+              "arrivalGate": "1",
+              "cabinTypeName": "ECONOMY",
+              "cabinTypeCode": "Y",
+              "aircraftTypeCode": "32A",
+              "bookingClass": "Y",
+              "meals": [
+                {
+                  "code": "R",
+                  "description": "Refreshment for purchase"
+                }
+              ],
+              "flightStatusCode": "HK",
+              "flightStatusName": "Confirmed",
+              "durationInMinutes": 95,
+              "distanceInMiles": 498
+            },
+            {
+              "itemId": "12",
+              "confirmationId": "S87MYH",
+              "sourceType": "ATPCO",
+              "flightNumber": 438,
+              "airlineCode": "LH",
+              "operatingFlightNumber": 438,
+              "operatingAirlineCode": "LH",
+              "fromAirportCode": "FRA",
+              "toAirportCode": "DFW",
+              "departureDate": "2024-06-30",
+              "departureTime": "10:10",
+              "departureTerminalName": "TERMINAL 1",
+              "departureGate": "1",
+              "arrivalDate": "2024-06-30",
+              "arrivalTime": "14:15",
+              "arrivalTerminalName": "TERMINAL D",
+              "arrivalGate": "D",
+              "cabinTypeName": "ECONOMY",
+              "cabinTypeCode": "Y",
+              "aircraftTypeCode": "333",
+              "bookingClass": "Y",
+              "meals": [
+                {
+                  "code": "R",
+                  "description": "Refreshment for purchase"
+                }
+              ],
+              "flightStatusCode": "HK",
+              "flightStatusName": "Confirmed",
+              "durationInMinutes": 665,
+              "distanceInMiles": 5143
+            }
+          ],
+          "journeys": [
+            {
+              "firstAirportCode": "DFW",
+              "departureDate": "2024-06-20",
+              "departureTime": "16:00",
+              "lastAirportCode": "KRK",
+              "numberOfFlights": 2
+            },
+            {
+              "firstAirportCode": "KRK",
+              "departureDate": "2024-06-30",
+              "departureTime": "06:15",
+              "lastAirportCode": "DFW",
+              "numberOfFlights": 2
+            }
+          ],
+          "fareOffers": [
+            {
+              "travelerIndices": [
+                1
+              ],
+              "flights": [
+                {
+                  "itemId": "9"
+                },
+                {
+                  "itemId": "10"
+                },
+                {
+                  "itemId": "11"
+                },
+                {
+                  "itemId": "12"
+                }
+              ],
+              "cabinBaggageAllowance": {
+                "maximumPieces": 1,
+                "baggagePieces": [
+                  {
+                    "maximumSizeInInches": 46,
+                    "maximumSizeInCentimeters": 118,
+                    "maximumWeightInPounds": 18,
+                    "maximumWeightInKilograms": 8,
+                    "numberOfPieces": 1
+                  }
+                ]
+              },
+              "checkedBaggageAllowance": {
+                "maximumPieces": 1,
+                "baggagePieces": [
+                  {
+                    "maximumSizeInInches": 62,
+                    "maximumSizeInCentimeters": 158,
+                    "maximumWeightInPounds": 50,
+                    "maximumWeightInKilograms": 23,
+                    "numberOfPieces": 1
+                  },
+                  {
+                    "maximumWeightInPounds": 50,
+                    "maximumWeightInKilograms": 23,
+                    "numberOfPieces": 1,
+                    "specialItemDescription": "BICYCLE UP TO FIFTY POUNDS TWENTY THREE KILOGRAMS"
+                  },
+                  {
+                    "maximumWeightInPounds": 50,
+                    "maximumWeightInKilograms": 23,
+                    "numberOfPieces": 1,
+                    "specialItemDescription": "SPORT FIREARMS UP TO FIFTY POUNDS TWENTY THREE KILOGRAMS"
+                  },
+                  {
+                    "maximumWeightInPounds": 50,
+                    "maximumWeightInKilograms": 23,
+                    "numberOfPieces": 1,
+                    "specialItemDescription": "GOLF EQUIPMENT UP TO FIFTY POUNDS TWENTY THREE KILOGRAMS"
+                  },
+                  {
+                    "maximumWeightInPounds": 50,
+                    "maximumWeightInKilograms": 23,
+                    "numberOfPieces": 1,
+                    "specialItemDescription": "HOCKEY EQUIP UP TO FIFTY POUNDS TWENTY THREE KILOGRAMS"
+                  },
+                  {
+                    "maximumWeightInPounds": 50,
+                    "maximumWeightInKilograms": 23,
+                    "numberOfPieces": 1,
+                    "specialItemDescription": "SCUBA EQUIPMENT UP TO FIFTY POUNDS TWENTY THREE KILOGRAMS"
+                  },
+                  {
+                    "maximumWeightInPounds": 50,
+                    "maximumWeightInKilograms": 23,
+                    "numberOfPieces": 1,
+                    "specialItemDescription": "FISHING EQUIPMENT UP TO FIFTY POUNDS TWENTY THREE KILOGRAMS"
+                  },
+                  {
+                    "maximumWeightInPounds": 50,
+                    "maximumWeightInKilograms": 23,
+                    "numberOfPieces": 1,
+                    "specialItemDescription": "BOARDS UP TO TWO METRES AND TWENTY THREE KILOGRAMS"
+                  },
+                  {
+                    "maximumWeightInPounds": 50,
+                    "maximumWeightInKilograms": 23,
+                    "numberOfPieces": 1,
+                    "specialItemDescription": "SKI OR SNOWBOARD EQT UP TO TWENTY THREE KILOGRAMS"
+                  },
+                  {
+                    "numberOfPieces": 1,
+                    "specialItemDescription": "WHEELCHAIR ASSISTIVE DEVICES"
+                  }
+                ]
+              }
+            }
+          ],
+          "remarks": [
+            {
+              "type": "GENERAL",
+              "text": "XXAUTH/123456   *Z/AX8431"
+            },
+            {
+              "type": "GENERAL",
+              "text": "XXTAW/"
+            },
+            {
+              "type": "HISTORICAL",
+              "text": "POSSIBLE DUPE BOOKING. SEE PNR ETXEGW"
+            }
+          ],
+          "allSegments": [
+            {
+              "id": "9",
+              "type": "FLIGHT",
+              "text": "439",
+              "vendorCode": "LH",
+              "startDate": "2024-06-20",
+              "startTime": "16:00",
+              "startLocationCode": "DFW",
+              "endDate": "2024-06-21",
+              "endTime": "08:50",
+              "endLocationCode": "FRA"
+            },
+            {
+              "id": "10",
+              "type": "FLIGHT",
+              "text": "1384",
+              "vendorCode": "LH",
+              "startDate": "2024-06-21",
+              "startTime": "10:25",
+              "startLocationCode": "FRA",
+              "endDate": "2024-06-21",
+              "endTime": "11:55",
+              "endLocationCode": "KRK"
+            },
+            {
+              "id": "11",
+              "type": "FLIGHT",
+              "text": "1371",
+              "vendorCode": "LH",
+              "startDate": "2024-06-30",
+              "startTime": "06:15",
+              "startLocationCode": "KRK",
+              "endDate": "2024-06-30",
+              "endTime": "07:50",
+              "endLocationCode": "FRA"
+            },
+            {
+              "id": "12",
+              "type": "FLIGHT",
+              "text": "438",
+              "vendorCode": "LH",
+              "startDate": "2024-06-30",
+              "startTime": "10:10",
+              "startLocationCode": "FRA",
+              "endDate": "2024-06-30",
+              "endTime": "14:15",
+              "endLocationCode": "DFW"
+            }
+          ],
+          "flightTickets": [
+            {
+              "number": "2207497575255",
+              "airlineCode": "LH",
+              "date": "2024-02-24",
+              "travelerIndex": 1,
+              "payment": {
+                "amount": "5532.65",
+                "total": "5532.65",
+                "currencyCode": "USD"
+              },
+              "flightCoupons": [
+                {
+                  "itemId": "9",
+                  "couponStatus": "Okay",
+                  "couponStatusCode": "RF"
+                }
+              ]
+            }
+          ],
+          "payments": {
+            "flightTotals": [
+              {
+                "subtotal": "4970.00",
+                "taxes": "562.65",
+                "total": "5532.65",
+                "currencyCode": "USD"
+              }
+            ]
+          },
+          "request": {
+            "confirmationId": "BQAUZG"
+          },
+          "errors": [
+            {
+              "category": "WARNING",
+              "type": "RESOURCE_UNAVAILABLE",
+              "description": "Details for ticket with number: 2207497575255 cannot be populated.",
+              "fieldPath": "GetBookingResponse.flightTickets",
+              "fieldName": "number",
+              "fieldValue": "2207497575255"
+            }
+          ]
+        }
+      },
+      "createBooking": {
+        "method": "POST",
+        "path": "/createBooking",
+        "request_example": {
+          "travelers": [
+            {
+              "givenName": "John",
+              "surname": "Smith",
+              "birthDate": "1970-01-23",
+              "passengerCode": "ADT",
+              "identityDocuments": [
+                {
+                  "documentNumber": "0123456789",
+                  "documentType": "PASSPORT",
+                  "expiryDate": "2026-07-09",
+                  "issuingCountryCode": "US",
+                  "residenceCountryCode": "US",
+                  "givenName": "John",
+                  "middleName": "Paul",
+                  "surname": "Smith",
+                  "birthDate": "1970-01-23",
+                  "gender": "MALE"
+                }
+              ]
+            }
+          ],
+          "contactInfo": {
+            "emails": [
+              "travel@sabre.com",
+              "travel2@sabre.com"
+            ],
+            "phones": [
+              "+1-555-123-4567"
+            ]
+          },
+          "flightDetails": {
+            "flights": [
+              {
+                "flightNumber": 6383,
+                "airlineCode": "AA",
+                "fromAirportCode": "PHX",
+                "toAirportCode": "ABQ",
+                "departureDate": "2025-12-28",
+                "departureTime": "09:40",
+                "bookingClass": "Y",
+                "marriageGroup": false,
+                "flightStatusCode": "NN"
+              }
+            ],
+            "flightPricing": [
+              {}
+            ]
+          },
+          "payment": {
+            "billingAddress": {
+              "name": "John Smith",
+              "street": "1230 Ellen Ave, apt 10",
+              "city": "Dallas",
+              "stateProvince": "TX",
+              "postalCode": "75063",
+              "countryCode": "US"
+            }
+          }
+        },
+        "response_example": {
+          "timestamp": "2025-11-28T08:17:53",
+          "confirmationId": "SWTQOV",
+          "booking": {
+            "bookingId": "SWTQOV",
+            "startDate": "2025-12-28",
+            "endDate": "2025-12-28",
+            "isCancelable": false,
+            "isTicketed": false,
+            "creationDetails": {
+              "creationUserSine": "AWS",
+              "creationDate": "2025-11-28",
+              "creationTime": "02:17",
+              "userWorkPcc": "KT1K",
+              "userHomePcc": "KT1K",
+              "primeHostId": "1S"
+            },
+            "contactInfo": {
+              "emails": [
+                "TRAVEL2@SABRE.COM",
+                "TRAVEL@SABRE.COM"
+              ],
+              "phones": [
+                "1-555-123-4567"
+              ]
+            },
+            "travelers": [
+              {
+                "givenName": "JOHN",
+                "surname": "SMITH",
+                "type": "ADULT",
+                "passengerCode": "ADT",
+                "nameAssociationId": "1",
+                "identityDocuments": [
+                  {
+                    "documentNumber": "0123456789",
+                    "documentType": "PASSPORT",
+                    "expiryDate": "2026-07-09",
+                    "issuingCountryCode": "US",
+                    "residenceCountryCode": "US",
+                    "givenName": "JOHN",
+                    "middleName": "PAUL",
+                    "surname": "SMITH",
+                    "birthDate": "1970-01-23",
+                    "gender": "MALE",
+                    "isPrimaryDocumentHolder": false,
+                    "itemId": "0d28c75fcdbbd293202a2e7bd59a5a9039ee6e43f146fc7731d4e264a6c6eb9ab351ad499fbb721420cb9365bff24ccd88d042edb280b46b7ac226da293df3fb"
+                  }
+                ]
+              }
+            ],
+            "flights": [
+              {
+                "itemId": "13",
+                "confirmationId": "OFJZJY",
+                "sourceType": "ATPCO",
+                "flightNumber": 6383,
+                "airlineCode": "AA",
+                "airlineName": "AMERICAN AIRLINES",
+                "operatingFlightNumber": 6383,
+                "operatingAirlineCode": "AA",
+                "operatingAirlineName": "AMERICAN AIRLINES",
+                "fromAirportCode": "PHX",
+                "toAirportCode": "ABQ",
+                "departureDate": "2025-12-28",
+                "departureTime": "09:40",
+                "departureTerminalName": "TERMINAL 4",
+                "departureGate": "4",
+                "arrivalDate": "2025-12-28",
+                "arrivalTime": "11:15",
+                "numberOfSeats": 1,
+                "cabinTypeName": "ECONOMY",
+                "cabinTypeCode": "Y",
+                "aircraftTypeCode": "CR7",
+                "aircraftTypeName": "CRJ-700 CANADAIR REGIONAL",
+                "bookingClass": "Y",
+                "flightStatusCode": "HK",
+                "flightStatusName": "Confirmed",
+                "durationInMinutes": 95,
+                "distanceInMiles": 328,
+                "travelerIndices": [
+                  1
+                ],
+                "identityDocuments": [
+                  {
+                    "itemId": "0d28c75fcdbbd293202a2e7bd59a5a9039ee6e43f146fc7731d4e264a6c6eb9ab351ad499fbb721420cb9365bff24ccd88d042edb280b46b7ac226da293df3fb",
+                    "status": "Confirmed"
+                  }
+                ]
+              }
+            ],
+            "journeys": [
+              {
+                "firstAirportCode": "PHX",
+                "departureDate": "2025-12-28",
+                "departureTime": "09:40",
+                "lastAirportCode": "ABQ",
+                "numberOfFlights": 1
+              }
+            ],
+            "fareRules": [
+              {
+                "originAirportCode": "PHX",
+                "destinationAirportCode": "ABQ",
+                "owningAirlineCode": "AA",
+                "passengerCode": "ADT",
+                "isRefundable": false,
+                "isChangeable": true,
+                "exchangePenalties": [
+                  {
+                    "applicability": "BEFORE_DEPARTURE",
+                    "conditionsApply": true,
+                    "penalty": {
+                      "amount": "0.0",
+                      "currencyCode": "PLN"
+                    },
+                    "hasNoShowCost": true,
+                    "noShowPenalty": {
+                      "amount": "0.00",
+                      "currencyCode": "PLN"
+                    }
+                  }
+                ]
+              }
+            ],
+            "fareOffers": [
+              {
+                "travelerIndices": [
+                  1
+                ],
+                "flights": [
+                  {
+                    "itemId": "13"
+                  }
+                ],
+                "cabinBaggageAllowance": {
+                  "maximumPieces": 2,
+                  "baggagePieces": [
+                    {
+                      "maximumSizeInInches": 45,
+                      "maximumSizeInCentimeters": 115,
+                      "numberOfPieces": 1
+                    },
+                    {
+                      "maximumSizeInInches": 40,
+                      "maximumSizeInCentimeters": 101,
+                      "numberOfPieces": 1
+                    }
+                  ]
+                },
+                "checkedBaggageAllowance": {
+                  "maximumPieces": 1,
+                  "baggagePieces": [
+                    {
+                      "maximumSizeInInches": 62,
+                      "maximumSizeInCentimeters": 158,
+                      "maximumWeightInPounds": 50,
+                      "maximumWeightInKilograms": 23,
+                      "numberOfPieces": 1
+                    },
+                    {
+                      "numberOfPieces": 1,
+                      "specialItemDescription": "ASSISTIVE DEVICES"
+                    },
+                    {
+                      "numberOfPieces": 1,
+                      "specialItemDescription": "INFANT CAR SEAT"
+                    },
+                    {
+                      "numberOfPieces": 1,
+                      "specialItemDescription": "STROLLER OR PUSHCHAIR"
+                    }
+                  ]
+                },
+                "checkedBaggageCharges": [
+                  {
+                    "maximumSizeInInches": 62,
+                    "maximumSizeInCentimeters": 158,
+                    "maximumWeightInPounds": 50,
+                    "maximumWeightInKilograms": 23,
+                    "numberOfPieces": 1,
+                    "isCheckInOnly": true,
+                    "fee": {
+                      "amount": "40.00",
+                      "currencyCode": "USD"
+                    }
+                  },
+                  {
+                    "maximumSizeInInches": 62,
+                    "maximumSizeInCentimeters": 158,
+                    "maximumWeightInPounds": 50,
+                    "maximumWeightInKilograms": 23,
+                    "numberOfPieces": 1,
+                    "isCheckInOnly": true,
+                    "fee": {
+                      "amount": "45.00",
+                      "currencyCode": "USD"
+                    }
+                  }
+                ]
+              }
+            ],
+            "fares": [
+              {
+                "creationDetails": {
+                  "creationUserSine": "AWS",
+                  "creationDate": "2025-11-28",
+                  "creationTime": "02:17",
+                  "purchaseDeadlineDate": "2025-11-29",
+                  "purchaseDeadlineTime": "23:59",
+                  "userWorkPcc": "KT1K",
+                  "userHomePcc": "KT1K"
+                },
+                "airlineCode": "AA",
+                "fareCalculationLine": "PHX AA ABQ Q0.17 705.12USD705.29END ZPPHX XFPHX4.5",
+                "isNegotiatedFare": false,
+                "fareConstruction": [
+                  {
+                    "fareBasisCode": "B0APZNN1",
+                    "baseRate": {
+                      "amount": "705.12",
+                      "currencyCode": "USD"
+                    },
+                    "brandFareCode": "MAIN",
+                    "brandFareName": "MAIN CABIN",
+                    "brandProgramCode": "AADOM",
+                    "brandProgramName": "AABFDOM1S",
+                    "isCurrentItinerary": true
+                  }
+                ],
+                "taxBreakdown": [
+                  {
+                    "taxCode": "US",
+                    "taxAmount": {
+                      "amount": "193.20",
+                      "currencyCode": "PLN"
+                    }
+                  },
+                  {
+                    "taxCode": "ZP",
+                    "taxAmount": {
+                      "amount": "18.99",
+                      "currencyCode": "PLN"
+                    }
+                  },
+                  {
+                    "taxCode": "AY",
+                    "taxAmount": {
+                      "amount": "20.45",
+                      "currencyCode": "PLN"
+                    }
+                  },
+                  {
+                    "taxCode": "XF",
+                    "taxAmount": {
+                      "amount": "16.44",
+                      "currencyCode": "PLN"
+                    }
+                  },
+                  {
+                    "taxCode": "AY",
+                    "taxAmount": {
+                      "amount": "0",
+                      "currencyCode": "PLN"
+                    }
+                  },
+                  {
+                    "taxCode": "US",
+                    "taxAmount": {
+                      "amount": "0",
+                      "currencyCode": "PLN"
+                    }
+                  },
+                  {
+                    "taxCode": "ZP",
+                    "taxAmount": {
+                      "amount": "0",
+                      "currencyCode": "PLN"
+                    }
+                  },
+                  {
+                    "taxCode": "XF",
+                    "taxAmount": {
+                      "amount": "0",
+                      "currencyCode": "PLN"
+                    }
+                  }
+                ],
+                "totals": {
+                  "subtotal": "2576.00",
+                  "taxes": "249.08",
+                  "total": "2825.08",
+                  "currencyCode": "PLN"
+                },
+                "pricingTypeCode": "S",
+                "pricingTypeName": "System",
+                "pricingStatusCode": "A",
+                "pricingStatusName": "Active",
+                "hasValidPricing": true,
+                "requestedTravelerType": "ADT",
+                "pricedTravelerType": "ADT",
+                "recordTypeCode": "PQ",
+                "recordTypeName": "Price Quote",
+                "recordId": "1"
+              }
+            ],
+            "allSegments": [
+              {
+                "id": "13",
+                "type": "FLIGHT",
+                "text": "6383",
+                "vendorCode": "AA",
+                "startDate": "2025-12-28",
+                "startTime": "09:40",
+                "startLocationCode": "PHX",
+                "endDate": "2025-12-28",
+                "endTime": "11:15",
+                "endLocationCode": "ABQ"
+              }
+            ],
+            "payments": {
+              "flightTotals": [
+                {
+                  "subtotal": "2576.00",
+                  "taxes": "249.08",
+                  "total": "2825.08",
+                  "currencyCode": "PLN"
+                }
+              ]
+            },
+            "specialServices": [
+              {
+                "travelerIndices": [
+                  1
+                ],
+                "code": "DOCS",
+                "name": "API-Passenger Travel Document",
+                "message": "/P/US/0123456789/US/23JAN1970/M/09JUL2026/SMITH/JOHN/PAUL",
+                "statusCode": "HK",
+                "statusName": "Confirmed"
+              }
+            ]
+          },
+          "request": {
+            "receivedFrom": "Create Booking",
+            "asynchronousUpdateWaitTime": 0,
+            "flightDetails": {
+              "flights": [
+                {
+                  "flightNumber": 6383,
+                  "airlineCode": "AA",
+                  "fromAirportCode": "PHX",
+                  "toAirportCode": "ABQ",
+                  "departureDate": "2025-12-28",
+                  "departureTime": "09:40",
+                  "bookingClass": "Y",
+                  "flightStatusCode": "NN"
+                }
+              ],
+              "flightPricing": [
+                {}
+              ]
+            },
+            "travelers": [
+              {
+                "givenName": "John",
+                "surname": "Smith",
+                "birthDate": "1970-01-23",
+                "passengerCode": "ADT",
+                "identityDocuments": [
+                  {
+                    "documentNumber": "0123456789",
+                    "documentType": "PASSPORT",
+                    "expiryDate": "2026-07-09",
+                    "issuingCountryCode": "US",
+                    "residenceCountryCode": "US",
+                    "givenName": "John",
+                    "middleName": "Paul",
+                    "surname": "Smith",
+                    "birthDate": "1970-01-23",
+                    "gender": "MALE"
+                  }
+                ]
+              }
+            ],
+            "contactInfo": {
+              "emails": [
+                "travel@sabre.com",
+                "travel2@sabre.com"
+              ],
+              "phones": [
+                "+1-555-123-4567"
+              ]
+            },
+            "payment": {
+              "billingAddress": {
+                "street": "1230 Ellen Ave, apt 10",
+                "city": "Dallas",
+                "stateProvince": "TX",
+                "postalCode": "75063",
+                "countryCode": "US",
+                "name": "John Smith"
+              }
+            }
+          }
+        }
+      },
+      "modifyBooking": {
+        "method": "POST",
+        "path": "/modifyBooking",
+        "request_example": {
+          "bookingSignature": "a94c7ad2bc6d259e86bbc4dff35413daaeb8155f617ac0fda02de3d60ec7b4c96f8c03926bbfc5970fe4cb18e5064eab4616f3131a9ffb8067f1821c223e12c3",
+          "confirmationId": "PZJLFF",
+          "retrieveBooking": true,
+          "receivedFrom": "Phone Update Request",
+          "before": {},
+          "after": {
+            "travelers": [
+              {
+                "givenName": "Jan",
+                "surname": "Kowalsky",
+                "birthDate": "1991-01-01",
+                "passengerCode": "ADT",
+                "phones": [
+                  {
+                    "number": "48321321321",
+                    "label": "M"
+                  }
+                ]
+              }
+            ]
+          }
+        },
+        "response_example": {
+          "timestamp": "2025-12-09T08:10:19",
+          "booking": {
+            "bookingId": "PZJLFF",
+            "startDate": "2026-01-03",
+            "endDate": "2026-01-05",
+            "isCancelable": true,
+            "isTicketed": false,
+            "creationDetails": {
+              "creationUserSine": "AWS",
+              "creationDate": "2025-12-09",
+              "creationTime": "01:49",
+              "agencyIataNumber": "99999999",
+              "userWorkPcc": "KT1K",
+              "userHomePcc": "KT1K",
+              "primeHostId": "1S"
+            },
+            "contactInfo": {
+              "emails": [
+                "JAN.KOWALSKY@SABRE.COM"
+              ],
+              "phones": [
+                "48321321321-"
+              ]
+            },
+            "travelers": [
+              {
+                "givenName": "JAN",
+                "surname": "KOWALSKY",
+                "type": "ADULT",
+                "passengerCode": "ADT",
+                "nameAssociationId": "1",
+                "emails": [
+                  "JAN.KOWALSKY@SABRE.COM"
+                ],
+                "phones": [
+                  {
+                    "number": "48321321321",
+                    "label": "M"
+                  },
+                  {
+                    "number": "48123123123",
+                    "label": "M"
+                  }
+                ]
+              }
+            ],
+            "remarks": [
+              {
+                "type": "FORM_OF_PAYMENT",
+                "text": "*VI4XXXXXXXXXXX5086\u00a503/30"
+              }
+            ],
+            "hotels": [
+              {
+                "itemId": "193",
+                "confirmationId": "3258373636-",
+                "hotelName": "HILTON ARLINGTON",
+                "address": {
+                  "street": "2401 E LAMAR BLVD",
+                  "city": "ARLINGTON",
+                  "stateProvince": "TX",
+                  "postalCode": "76006",
+                  "countryCode": "US",
+                  "cityCode": "DFW"
+                },
+                "checkInDate": "2026-01-03",
+                "checkInTime": "00:00",
+                "checkOutDate": "2026-01-05",
+                "checkOutTime": "00:00",
+                "leadTravelerIndex": 1,
+                "room": {
+                  "roomType": "1 KING BED",
+                  "quantity": 1,
+                  "description": "FLEXIBLE RATE 1 KING BED 337 SQ FEET/ FREE HIGH SPEED INTERNET REFRIGERATOR/ LAPTOP SAFE",
+                  "productCode": "A02LV0",
+                  "roomRate": {
+                    "amount": "189.00",
+                    "currencyCode": "USD"
+                  },
+                  "travelerIndices": [
+                    1
+                  ],
+                  "supplierRateCode": "LV0"
+                },
+                "isRefundable": true,
+                "refundPenalties": [
+                  {
+                    "applicableFromDate": "2025-12-09T08:10:19",
+                    "applicableToDate": "2026-01-03T05:00:00",
+                    "penalty": {
+                      "amount": "0.00",
+                      "currencyCode": "USD"
+                    }
+                  },
+                  {
+                    "applicableFromDate": "2026-01-03T05:00:00",
+                    "applicableToDate": "2026-01-05T00:00:00",
+                    "penalty": {
+                      "amount": "0.00",
+                      "currencyCode": "USD"
+                    }
+                  }
+                ],
+                "hotelStatusCode": "HK",
+                "hotelStatusName": "Confirmed",
+                "chainCode": "HH",
+                "chainName": "Hilton Hotels",
+                "propertyId": "100161666",
+                "sabrePropertyId": "9075",
+                "contactInfo": {
+                  "phones": [
+                    "1-817-640-3322"
+                  ],
+                  "faxes": [
+                    "1-817-633-1430"
+                  ]
+                },
+                "guaranteeTypeCode": 5,
+                "guaranteeTypeName": "Credit card",
+                "paymentPolicy": "GUARANTEE",
+                "payment": {
+                  "subtotal": "327.92",
+                  "taxes": "49.19",
+                  "total": "377.11",
+                  "currencyCode": "USD",
+                  "fees": "9.92"
+                },
+                "numberOfGuests": 2,
+                "sourceTypeCode": 100,
+                "sourceTypeName": "Sabre GDS"
+              }
+            ],
+            "allSegments": [
+              {
+                "id": "193",
+                "type": "HOTEL",
+                "text": "3258373636-",
+                "vendorCode": "HH",
+                "locationCode": "DFW",
+                "address": {
+                  "street": "2401 E LAMAR BLVD",
+                  "city": "ARLINGTON",
+                  "stateProvince": "TX",
+                  "postalCode": "76006",
+                  "countryCode": "US"
+                },
+                "startDate": "2026-01-03",
+                "startTime": "00:00",
+                "endDate": "2026-01-05",
+                "endTime": "00:00"
+              }
+            ],
+            "payments": {
+              "hotelTotals": [
+                {
+                  "subtotal": "327.92",
+                  "taxes": "49.19",
+                  "total": "377.11",
+                  "currencyCode": "USD",
+                  "fees": "9.92"
+                }
+              ],
+              "formsOfPayment": [
+                {
+                  "cardTypeCode": "VI",
+                  "cardNumber": "4XXXXXXXXXXX5086",
+                  "expiryDate": "2030-03",
+                  "type": "PAYMENTCARD",
+                  "cardHolder": {
+                    "givenName": "Jan",
+                    "surname": "Kowalsky",
+                    "email": "jan.kowalsky@sabre.com",
+                    "phone": "+48123123123",
+                    "address": {
+                      "street": "Mazowiecka 3",
+                      "city": "Krakow",
+                      "stateProvince": "Malopolska",
+                      "postalCode": "30-303",
+                      "countryCode": "PL"
+                    }
+                  },
+                  "useType": "Unknown",
+                  "tripType": "Unknown",
+                  "useTypes": [
+                    "Unknown"
+                  ],
+                  "tripTypes": [
+                    "Unknown"
+                  ]
+                }
+              ]
+            },
+            "otherServices": [
+              {
+                "serviceMessage": "HHL HH 09075 ARR03JAN CXL 1 DAY PRIOR TO ARR",
+                "chainCode": "HH"
+              },
+              {
+                "serviceMessage": "HHL HH 09075 ARR03JAN CREDIT CARD GUARANTEE",
+                "chainCode": "HH"
+              },
+              {
+                "serviceMessage": "HHL 100161666 A02LV0  D FLEXIBLE RATE",
+                "chainCode": "HH"
+              },
+              {
+                "serviceMessage": "HHL 100161666 A02LV0  C CANCEL BY 12AM DAY OF ARRIVA",
+                "chainCode": "HH"
+              },
+              {
+                "serviceMessage": "HHL 100161666 A02LV0  D FLEXIBLE RATE 1 KING BED 337",
+                "chainCode": "HH"
+              },
+              {
+                "serviceMessage": "HHL 100161666 A02LV0  D  SQ FEET/ FREE HIGH SPEED IN",
+                "chainCode": "HH"
+              },
+              {
+                "serviceMessage": "HHL 100161666 A02LV0  TTX 49.19 TTL TAX",
+                "chainCode": "HH"
+              },
+              {
+                "serviceMessage": "HHL 100161666 A02LV0  TSC 9.92 TTL SURCHARGE",
+                "chainCode": "HH"
+              },
+              {
+                "serviceMessage": "HHL 100161666 A02LV0  SC 9.92 MANDATORY CHARGE",
+                "chainCode": "HH"
+              },
+              {
+                "serviceMessage": "HHL 100161666 A02LV0  TP 377.11 USD APPROX. TTL PRIC",
+                "chainCode": "HH"
+              },
+              {
+                "serviceMessage": "HHL 100161666 A02LV0  TD INCLUDES TAXES AND SURCHARG",
+                "chainCode": "HH"
+              }
+            ]
+          },
+          "request": {
+            "bookingSignature": "a94c7ad2bc6d259e86bbc4dff35413daaeb8155f617ac0fda02de3d60ec7b4c96f8c03926bbfc5970fe4cb18e5064eab4616f3131a9ffb8067f1821c223e12c3",
+            "confirmationId": "PZJLFF",
+            "retrieveBooking": true,
+            "receivedFrom": "Phone Update Request",
+            "before": {},
+            "after": {
+              "creationDetails": {
+                "agencyIataNumber": "99999999"
+              },
+              "remarks": [
+                {
+                  "type": "FORM_OF_PAYMENT",
+                  "text": "*VI4XXXXXXXXXXX5086\u00a503/30"
+                }
+              ],
+              "hotels": [
+                {
+                  "itemId": "99",
+                  "checkInDate": "2026-01-03",
+                  "checkOutDate": "2026-01-05",
+                  "leadTravelerIndex": 1,
+                  "room": {
+                    "productCode": "A02LV0",
+                    "travelerIndices": [
+                      1
+                    ]
+                  },
+                  "numberOfGuests": 2,
+                  "paymentPolicy": "GUARANTEE"
+                }
+              ],
+              "travelers": [
+                {
+                  "givenName": "Jan",
+                  "surname": "Kowalsky",
+                  "birthDate": "1991-01-01",
+                  "passengerCode": "ADT",
+                  "emails": [
+                    "JAN.KOWALSKY@SABRE.COM"
+                  ],
+                  "phones": [
+                    {
+                      "number": "48321321321",
+                      "label": "M"
+                    }
+                  ]
+                }
+              ],
+              "otherServices": [
+                {
+                  "serviceMessage": "HHL HH 09075 ARR03JAN CXL 1 DAY PRIOR TO ARR"
+                },
+                {
+                  "serviceMessage": "HHL HH 09075 ARR03JAN CREDIT CARD GUARANTEE"
+                },
+                {
+                  "serviceMessage": "HHL 100161666 A02LV0  D FLEXIBLE RATE"
+                },
+                {
+                  "serviceMessage": "HHL 100161666 A02LV0  C CANCEL BY 12AM DAY OF ARRIVA"
+                },
+                {
+                  "serviceMessage": "HHL 100161666 A02LV0  D FLEXIBLE RATE 1 KING BED 337"
+                },
+                {
+                  "serviceMessage": "HHL 100161666 A02LV0  D  SQ FEET/ FREE HIGH SPEED IN"
+                },
+                {
+                  "serviceMessage": "HHL 100161666 A02LV0  TTX 49.19 TTL TAX"
+                },
+                {
+                  "serviceMessage": "HHL 100161666 A02LV0  TSC 9.92 TTL SURCHARGE"
+                },
+                {
+                  "serviceMessage": "HHL 100161666 A02LV0  SC 9.92 MANDATORY CHARGE"
+                },
+                {
+                  "serviceMessage": "HHL 100161666 A02LV0  TP 377.11 USD APPROX. TTL PRIC"
+                },
+                {
+                  "serviceMessage": "HHL 100161666 A02LV0  TD INCLUDES TAXES AND SURCHARG"
+                }
+              ]
+            }
+          }
+        }
+      }
+    }
+  },
+  "Hotel Price Check API - Beta API": {
+    "base": "https://api.cert.platform.sabre.com/v1/hotels",
+    "operations": {
+      "hotelPriceCheck": {
+        "method": "POST",
+        "path": "/checkHotelRate",
+        "request_example": null,
+        "response_example": null
+      }
+    }
+  },
+  "Hotel Rates API - Beta API": {
+    "base": "https://api.cert.platform.sabre.com/v1/hotels",
+    "operations": {
+      "getHotelRates": {
+        "method": "POST",
+        "path": "/getHotelRates",
+        "request_example": {
+          "currencyCode": "USD",
+          "checkInDate": "2025-10-21",
+          "checkOutDate": "2025-10-23",
+          "hotelCode": "123456789",
+          "roomType": "Suite",
+          "bedType": "Double",
+          "numberOfAdults": 2,
+          "numberOfChildren": 0
+        },
+        "response_example": {
+          "hotelCode": "123456789",
+          "rooms": [
+            {
+              "roomIndex": 1,
+              "numberOfAdults": 2,
+              "numberOfChildren": 0,
+              "roomType": "Suite",
+              "bedTypes": [
+                {
+                  "description": "King",
+                  "numberOfBeds": 1
+                }
+              ],
+              "roomDescription": {
+                "name": "LONG TERM STAY",
+                "text": "LONG TERM STAY RATE, 5PLS NTS, KING SUITE WITH FIREPLACE, 1 BEDROOM SUITE, 1 KING, SOFA BED"
+              },
+              "amenities": [
+                "Fireplace",
+                "Sofa bed"
+              ],
+              "ratePlans": [
+                {
+                  "ratePlanName": "LONG TERM STAY",
+                  "ratePlanType": "24",
+                  "ratePlanDescription": "Published",
+                  "limitedAvailability": false,
+                  "rateSource": "100",
+                  "rateKey": "v0ZC4khoN4Q41BI9EfRdrXZAiLaE5sv294oMvGye47PXPcu0FQdMOL/AEUILTEu3uBjh/xoCeeQutQM1Nl8zNeTNcf0pvbcpMq2JV/lC8tE7laUgW1PuvYom7cZoS9OvwJTTL17vleqshgbAGraNbYvW66V84RMS61f9Ezl1JK20OTiu7+NhbIdL0T/PYMUS5V+6IJIHMZzXTx3QikkaLNgFMOi5rtHJLJaKt3Rzc54vVJ0JCB8L3G5ecSnsITyUDzan9r3Pfn66PVmriATPq5PDArNjYdxNwtOfhD476T72H48wcXkDeztdbylCSijATN3/oM4ok1N7iaoZ1KC1b4PTuN/lHG29E9iv9RL6WjpS561oGaWLShoJvjlM/FduyfXf7ElgRyw/2zWYE6isPFjwQD/p+2CvW+atOTv6BIqwovVRtMrM7nn0G9AAB/QrUlUHGTvARVOTJmv+NbTrUW5cPsj23IqGSaIvKqPD7rMqbKhkY7kTQyZ45yjoFLaAJM7LeOfIkVrKqiAO7QgWVyRVss1AYF/NcpEl+N6h2XZrI/tU0msYkDo+thauY2SRnJpzg/A/yYV0zKkoT7S+HWL+nAoPr1yvUmzkY+PZ0KUyXmGh7iL/aRHhF0tA3jDGSkKD/P8kHWvkoH5ImguKzS4AQYCufaJtwNh0ZOt2tmSRYVRT9VYrkN2vShwjRYc0",
+                  "productCode": "LTSB00",
+                  "rateDetails": {
+                    "currencyCode": "USD",
+                    "startDate": "2025-10-10",
+                    "endDate": "2025-10-17",
+                    "averageNightlyRate": "286.87",
+                    "approxTotalPrice": "2008.11",
+                    "areAdditionalFeesInclusive": true,
+                    "isTaxInclusive": true,
+                    "rates": [
+                      {
+                        "startDate": "2025-10-10",
+                        "endDate": "2025-10-12",
+                        "amountBeforeTax": "319.00"
+                      },
+                      {
+                        "startDate": "2025-10-12",
+                        "endDate": "2025-10-17",
+                        "amountBeforeTax": "219.00"
+                      }
+                    ],
+                    "taxes": {
+                      "amount": "240.45",
+                      "tax": [
+                        {
+                          "startDate": "2025-10-10",
+                          "endDate": "2025-10-12",
+                          "amount": "44.26"
+                        }
+                      ]
+                    },
+                    "fees": {
+                      "amount": "34.66",
+                      "fee": [
+                        {
+                          "startDate": "2025-10-10",
+                          "endDate": "2025-10-12",
+                          "amount": "6.38"
+                        },
+                        {
+                          "startDate": "2025-10-12",
+                          "endDate": "2025-10-17",
+                          "amount": "30.38"
+                        }
+                      ]
+                    },
+                    "roomExtras": [
+                      {
+                        "description": "Extra adult charge",
+                        "amount": "0.00"
+                      },
+                      {
+                        "description": "Cribs",
+                        "amount": "0.00"
+                      }
+                    ],
+                    "cancelPenalties": [
+                      {
+                        "refundable": true
+                      }
+                    ],
+                    "guarantee": {
+                      "guaranteeType": "GUAR",
+                      "guaranteesAccepted": [
+                        {
+                          "guaranteeTypeDescription": "Credit card",
+                          "paymentCards": [
+                            {
+                              "cardCode": "AX",
+                              "cardName": "AMERICAN EXPRESS"
+                            },
+                            {
+                              "cardCode": "DC",
+                              "cardName": "DINERS CLUB CARD"
+                            },
+                            {
+                              "cardCode": "DS",
+                              "cardName": "DISCOVER CARD"
+                            },
+                            {
+                              "cardCode": "JC",
+                              "cardName": "JCB CREDIT CARD"
+                            },
+                            {
+                              "cardCode": "IK",
+                              "cardName": "MASTER CARD"
+                            },
+                            {
+                              "cardCode": "CA",
+                              "cardName": "MASTERCARD"
+                            },
+                            {
+                              "cardCode": "VI",
+                              "cardName": "VISA"
+                            },
+                            {
+                              "cardCode": "VS",
+                              "cardName": "VISA"
+                            },
+                            {
+                              "cardCode": "MC",
+                              "cardName": "MASTER CARD"
+                            }
+                          ]
+                        }
+                      ]
+                    },
+                    "additionalDetails": [
+                      {
+                        "description": "Rate disclaimer information",
+                        "text": "INCLUDES TAXES AND SURCHARGES"
+                      },
+                      {
+                        "description": "Miscellaneous information",
+                        "text": "TRAVEL LIKE YOU LIVE"
+                      }
+                    ]
+                  }
+                }
+              ]
+            }
+          ]
+        }
+      }
+    }
+  },
+  "Hotel Search API - Beta API": {
+    "base": "https://api.cert.platform.sabre.com/v1/hotels",
+    "operations": {
+      "hotelSearch": {
+        "method": "POST",
+        "path": "/hotelSearch",
+        "request_example": {
+          "currencyCode": "USD",
+          "radiusInMiles": 200,
+          "checkInDate": "2025-10-21",
+          "checkOutDate": "2025-10-23",
+          "numberOfAdults": 2,
+          "latitude": 35.04022,
+          "longitude": -106.60919
+        },
+        "response_example": {
+          "timestamp": "2025-10-01T12:00:00Z",
+          "hotels": [
+            {
+              "hotel": {
+                "hotelCode": "100124510",
+                "hotelName": "Hyatt Regency Tulsa",
+                "logo": "http://imagesserver.com/hotelImg",
+                "latitude": 36.1548,
+                "longitude": -95.990356,
+                "address": {
+                  "addressLine1": "50 N MARTINGALE RD",
+                  "addressLine2": "Pointer Square",
+                  "addressLine3": "Orlando",
+                  "cityName": "Tulsa",
+                  "cityCode": "TUL",
+                  "stateProvinceCode": "OK",
+                  "postalCode": "60173",
+                  "countryName": "United States",
+                  "countryCode": "US"
+                },
+                "contact": {
+                  "phone": "+1 555 123 9999 ext 101",
+                  "fax": "+1 555 123 9999",
+                  "email": "test@test.com"
+                },
+                "amenities": [
+                  "Fireplace"
+                ]
+              },
+              "imageUrl": "http://imageurl.com",
+              "rateDetails": {
+                "startDate": "2025-10-10",
+                "endDate": "2025-10-17",
+                "averageNightlyRate": "218.01",
+                "approxTotalPrice": "1526.08",
+                "areAdditionalFeesInclusive": true,
+                "isTaxInclusive": true,
+                "rates": [
+                  {
+                    "startDate": "2025-10-10",
+                    "endDate": "2025-10-12",
+                    "amountBeforeTax": "229.00",
+                    "amountAfterTax": "329.00"
+                  }
+                ],
+                "taxes": {
+                  "amount": "187.73",
+                  "tax": [
+                    {
+                      "startDate": "2025-10-10",
+                      "endDate": "2025-10-12",
+                      "amount": "229.00"
+                    }
+                  ]
+                },
+                "fees": {
+                  "amount": "27.06",
+                  "fee": [
+                    {
+                      "startDate": "2025-10-10",
+                      "endDate": "2025-10-12",
+                      "amount": "4.58"
+                    }
+                  ]
+                },
+                "roomExtras": [
+                  {
+                    "description": "Extra adult charge",
+                    "amount": "0.00"
+                  }
+                ],
+                "cancelPenalties": [
+                  {
+                    "refundable": true,
+                    "deadline": {
+                      "absoluteDeadline": "2019-05-26T15:48:17",
+                      "offsetTimeUnit": "Day",
+                      "offsetUnitMultiplier": 2
+                    },
+                    "amountPercent": {
+                      "percent": "12.01",
+                      "amount": "84.12",
+                      "currencyCode": "AUD"
+                    },
+                    "description": "Cancellations made up to 2 days before arrival are fully refundable."
+                  }
+                ],
+                "guarantee": {
+                  "guaranteeType": "GUAR",
+                  "guaranteesAccepted": [
+                    {
+                      "guaranteeType": "Credit card",
+                      "paymentCards": [
+                        {
+                          "cardCode": "VI",
+                          "cardName": "VISA"
+                        }
+                      ]
+                    }
+                  ],
+                  "guaranteeDescription": "A valid credit card is required at booking."
+                },
+                "additionalDetails": [
+                  {
+                    "description": "Rate disclaimer information",
+                    "text": "INCLUDES TAXES AND SURCHARGES"
+                  }
+                ],
+                "commissionPercent": 10,
+                "commissionType": "FlatRate",
+                "rateSource": "100",
+                "rateKey": "sampleKey",
+                "currencyCode": "USD"
+              },
+              "rooms": [
+                {
+                  "roomIndex": 1,
+                  "nonSmoking": true,
+                  "roomTypeCode": "1",
+                  "roomTypeName": "Deluxe Suite",
+                  "roomCategory": "Standard",
+                  "numberOfAdults": 1,
+                  "numberOfChildren": 0,
+                  "floor": 5,
+                  "roomViewDescription": "Ocean View",
+                  "isSharingAvailable": true,
+                  "bedTypes": [
+                    {
+                      "code": "9",
+                      "name": "King Bed",
+                      "numberOfBeds": 1
+                    }
+                  ],
+                  "roomDescription": {
+                    "name": "PREPAY NONREF NO CHNG",
+                    "text": "PREPAY NON-REFUNDABLE NON-CHANGEABLE, KING SUITE WITH FIREPLACE"
+                  },
+                  "amenities": [
+                    "Fireplace"
+                  ],
+                  "ratePlans": [
+                    {
+                      "ratePlanName": "PREPAY NONREF NO CHNG",
+                      "ratePlanCode": "PRO",
+                      "ratePlanType": "Published",
+                      "isRatePrepaid": false,
+                      "limitedAvailability": false,
+                      "rateSource": "100",
+                      "rateKey": "sampleKey",
+                      "productCode": "AP7B00",
+                      "inclusions": [
+                        "Internet services"
+                      ],
+                      "mealPlanDescription": "Buffet Breakfast",
+                      "rateDetails": {
+                        "startDate": "2025-10-10",
+                        "endDate": "2025-10-17",
+                        "averageNightlyRate": "218.01",
+                        "approxTotalPrice": "1526.08",
+                        "areAdditionalFeesInclusive": true,
+                        "isTaxInclusive": true,
+                        "rates": [
+                          {
+                            "startDate": "2025-10-10",
+                            "endDate": "2025-10-12",
+                            "amountBeforeTax": "229.00",
+                            "amountAfterTax": "329.00"
+                          }
+                        ],
+                        "taxes": {
+                          "amount": "187.73",
+                          "tax": [
+                            {
+                              "startDate": "2025-10-10",
+                              "endDate": "2025-10-12",
+                              "amount": "229.00"
+                            }
+                          ]
+                        },
+                        "fees": {
+                          "amount": "27.06",
+                          "fee": [
+                            {
+                              "startDate": "2025-10-10",
+                              "endDate": "2025-10-12",
+                              "amount": "4.58"
+                            }
+                          ]
+                        },
+                        "roomExtras": [
+                          {
+                            "description": "Extra adult charge",
+                            "amount": "0.00"
+                          }
+                        ],
+                        "cancelPenalties": [
+                          {
+                            "refundable": true,
+                            "deadline": {
+                              "absoluteDeadline": "2019-05-26T15:48:17",
+                              "offsetTimeUnit": "Day",
+                              "offsetUnitMultiplier": 2
+                            },
+                            "amountPercent": {
+                              "percent": "12.01",
+                              "amount": "84.12",
+                              "currencyCode": "AUD"
+                            },
+                            "description": "Cancellations made up to 2 days before arrival are fully refundable."
+                          }
+                        ],
+                        "guarantee": {
+                          "guaranteeType": "GUAR",
+                          "guaranteesAccepted": [
+                            {
+                              "guaranteeType": "Credit card",
+                              "paymentCards": [
+                                {
+                                  "cardCode": "VI",
+                                  "cardName": "VISA"
+                                }
+                              ]
+                            }
+                          ],
+                          "guaranteeDescription": "A valid credit card is required at booking."
+                        },
+                        "additionalDetails": [
+                          {
+                            "description": "Rate disclaimer information",
+                            "text": "INCLUDES TAXES AND SURCHARGES"
+                          }
+                        ],
+                        "commissionPercent": 10,
+                        "commissionType": "FlatRate",
+                        "rateSource": "100",
+                        "rateKey": "sampleKey",
+                        "currencyCode": "USD"
+                      }
+                    }
+                  ]
+                }
+              ]
+            }
+          ]
+        }
+      }
+    }
+  }
+}

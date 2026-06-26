@@ -1,0 +1,57 @@
+<!doctype html>
+<html lang="en">
+<meta charset="utf-8">
+<title>Travel Voice Agent</title>
+<style>
+  body { font: 16px system-ui; max-width: 640px; margin: 3rem auto; padding: 0 1rem; }
+  button { font-size: 1.1rem; padding: .6rem 1.2rem; border-radius: 8px; cursor: pointer; }
+  #log { background: #111; color: #ddd; padding: 1rem; border-radius: 8px; min-height: 12rem;
+         white-space: pre-wrap; margin-top: 1rem; }
+</style>
+
+<h1>🎙️ Travel voice agent</h1>
+<p>Click connect, allow the mic, and say: <em>"Look up booking BQAUZG"</em>.</p>
+<button id="talk">Connect &amp; talk</button>
+<div id="log"></div>
+
+<script type="module">
+// Vocal Bridge SDK (npm: @vocalbridgeai/sdk) loaded as browser ESM via esm.sh.
+// If this 404s, check the package's CDN path on the Develop tab / npm.
+import { VocalBridge } from 'https://esm.sh/@vocalbridgeai/sdk';
+
+const logEl = document.getElementById('log');
+const log = m => { logEl.textContent += m + '\n'; };
+const session = crypto.randomUUID();   // one conversation per page load
+
+// Ask our Python brain (Claude + Sabre tools) for an answer to a transcribed question.
+async function askBrain(query) {
+  const r = await fetch('/api/brain', {
+    method: 'POST', headers: { 'Content-Type': 'application/json' },
+    body: JSON.stringify({ query, session }),
+  });
+  const j = await r.json();
+  return j.response || j.error || '(no answer)';
+}
+
+document.getElementById('talk').onclick = async () => {
+  // The SDK fetches a LiveKit token from our backend (which holds the vb_ key).
+  const vb = new VocalBridge({ auth: { tokenUrl: '/api/voice-token' } });
+
+  vb.on('transcript', ({ role, text }) => log(`[${role}] ${text}`));
+
+  // ─── AI-agent bridge (automatic mode, per Vocal Bridge docs) ─────────
+  // The voice agent delegates each domain question here; whatever we return
+  // is spoken back to the caller automatically.
+  vb.onAIAgentQuery(async (query) => {
+    log(`[you→agent] ${query}`);
+    const response = await askBrain(query);
+    log(`[agent→you] ${response}`);
+    return response;
+  });
+  // ───────────────────────────────────────────────────────────────────
+
+  await vb.connect();
+  log('connected — start talking');
+};
+</script>
+</html>
