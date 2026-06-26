@@ -12,12 +12,9 @@ travel brain calls **Sabre's Agentic APIs** as tools, driven by **Claude**.
 
 ## Demo
 
-<!-- Paste the GitHub video URL on its own line below (drag demo.mp4 into a GitHub
-     comment box to get a https://github.com/user-attachments/assets/... link). -->
+<video src="https://github.com/az9713/voice-ai-hackthon/raw/main/demo.mp4" controls width="720"></video>
 
-REPLACE-WITH-VIDEO-URL
-
-*(The clip — `demo.mp4`, ~1.6 MB — is also in this repo.)*
+▶ If the player above doesn't load, [watch demo.mp4](https://github.com/az9713/voice-ai-hackthon/raw/main/demo.mp4) (~1.6 MB).
 
 ## How it works
 
